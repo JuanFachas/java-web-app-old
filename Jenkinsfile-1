@@ -1,17 +1,17 @@
 pipeline {
-  agent { label 'linux' }
+  agent any
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t darinpope/java-web-app:latest .'
+        sh 'docker build -t darinpope/java-web-app-old:latest .'
       }
     }
     stage('Scan') {
       steps {
-        sh 'trivy darinpope/java-web-app:latest'
+        sh 'trivy darinpope/java-web-app-old:latest'
       }
     }
   }
